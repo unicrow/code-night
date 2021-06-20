@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -8,7 +8,7 @@ import './App.css';
 import { ButtonGroup } from '@material-ui/core';
 
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Switch,
   Route,
   Link
@@ -21,7 +21,7 @@ import CVDetail from './screens/cv-detail';
 function App() {
   
   return (
-    <BrowserRouter>
+    <Router>
       <Container
         maxWidth={"md"}
         className="App" 
@@ -37,13 +37,10 @@ function App() {
             aria-label="text primary button group"
           >
             <Button>
-              <Link to="/add">CV Add</Link>
+              <Link to="/">CV Listesi</Link>
             </Button>
             <Button>
-              <Link to="/cv/1">CV Detail</Link>
-            </Button>
-            <Button>
-              <Link to="/">CV List</Link>
+              <Link to="/add">CV Ekle</Link>
             </Button>
           </ButtonGroup>
           
@@ -51,18 +48,21 @@ function App() {
             
             <Route
               path="/"
+              exact
             >
               <CVList/>
             </Route>
 
             <Route
               path="/add"
+              exact
             >
               <CVAdd/>
             </Route>
 
             <Route
               path="/cv/:id"
+              exact
             >
               <CVDetail/>
             </Route>
@@ -72,7 +72,7 @@ function App() {
         </Paper>
 
       </Container>
-    </BrowserRouter>
+    </Router>
   );
 }
 
