@@ -1,25 +1,78 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+
 import './App.css';
+import { ButtonGroup } from '@material-ui/core';
+
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import CVList from './screens/cv-list';
+import CVAdd from './screens/cv-add';
+import CVDetail from './screens/cv-detail';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BrowserRouter>
+      <Container
+        maxWidth={"md"}
+        className="App" 
+        fixed
+      >
+
+        <Paper
+          className="page"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <ButtonGroup 
+            variant="text" 
+            color="primary" 
+            aria-label="text primary button group"
+          >
+            <Button>
+              <Link to="/add">CV Add</Link>
+            </Button>
+            <Button>
+              <Link to="/cv/1">CV Detail</Link>
+            </Button>
+            <Button>
+              <Link to="/">CV List</Link>
+            </Button>
+          </ButtonGroup>
+          
+          <Switch>
+            
+            <Route
+              path="/"
+            >
+              <CVList/>
+            </Route>
+
+            <Route
+              path="/add"
+            >
+              <CVAdd/>
+            </Route>
+
+            <Route
+              path="/cv/:id"
+            >
+              <CVDetail/>
+            </Route>
+
+          </Switch>
+
+        </Paper>
+
+      </Container>
+    </BrowserRouter>
   );
 }
 
